@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위, 바위, 보!</title>
+    <style>
+      #computer {
+        width: 165px;
+        height: 200px;
+      }
+      .btn {
+        margin-top: 20px;
+        padding: 3px 10px;
+        cursor: pointer;
+      }
+      .btn + .btn {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="computer"></div>
+    <div>
+      <button id="scissors" class="btn">가위</button
+      ><button id="rock" class="btn">바위</button
+      ><button id="paper" class="btn">보</button>
+    </div>
+    <div id="score">0</div>
+    <script>
+      const $computer = document.querySelector("#computer");
+      const $score = document.querySelector("#score");
+      const $rock = document.querySelector("#rock");
+      const $scissors = document.querySelector("#scissors");
+      const $paper = document.querySelector("#paper");
+      const IMG_URL = "./rsp.png";
+
+      // 가위바위보이미지 변경
+      $computer.style.background = `url(${IMG_URL}) 0 0`;
+      $computer.style.backgroundSize = `auto 200px`;
+
+      //   $computer.style.background = `url(${IMG_URL}) -220px 0`;
+      //   $computer.style.background = `url(${IMG_URL}) -440px 0`;
+
+      const rspX = {
+        scissors: "0", // 가위
+        rock: "-230px", // 바위
+        paper: "-440px", // 보
+      };
+
+      let computerChoice = "scissors";
+      const changeComputerHand = () => {
+        if (computerChoice === "scissors") {
+          computerChoice = "rock";
+        } else if (computerChoice === "rock") {
+          computerChoice = "paper";
+        } else if (computerChoice === "paper") {
+          computerChoice = "scissors";
+        }
+        $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
+        $computer.style.backgroundSize = "auto 200px";
+      };
+
+      let intervalId = setInterval(changeComputerHand, 50);
+
+      const clickButton = () => {
+        clearInterval(intervalId);
+        //점수 계산 및 화면 표시
+        setTimeout(() => {
+          intervalId = setInterval(changeComputerHand, 50);
+        }, 1000);
+      };
+
+      $rock.addEventListener("click", clickButton);
+      $scissors.addEventListener("click", clickButton);
+      $paper.addEventListener("click", clickButton);
+
+      //7-3 5분(버그수정하기)
+    </script>
+  </body>
+</html>
