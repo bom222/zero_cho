@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>반응속도 체크하기</title>
+    <style>
+      #screen {
+        width: 300px;
+        height: 200px;
+        line-height: 200px;
+        font-size: 1.2rem;
+        text-align: center;
+        user-select: none;
+        color: #f7f7f7;
+      }
+      #screen.waiting {
+        background: blueviolet;
+      }
+      #screen.ready {
+        background: darkred;
+      }
+      #screen.now {
+        background: royalblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="screen" class="waiting">클릭해서 시작하세요.</div>
+    <div id="result"></div>
+
+    <script>
+      const $screen = document.querySelector("#screen");
+      const $result = document.querySelector("#result");
+
+      let startTime;
+      let endTime;
+      const records = [];
+
+      $screen.addEventListener("click", (event) => {
+        // 보라
+        if (event.target.classList.contains("waiting")) {
+          $screen.classList.replace("waiting", "ready");
+          $screen.textContent = "파란색이 되면 클릭하세요.";
+
+          setTimeout(function () {
+            $screen.classList.replace("ready", "now");
+            $screen.textContent = "클릭하세요!";
+            startTime = new Date();
+            // 시간재기 시작!
+          }, Math.floor(Math.random() * 1000) + 2000); // 2~3초 사이의 수
+        } else if (event.target.classList.contains("ready")) {
+          //  빨강
+          // $screen.classList.replace("ready", "now");
+        } else if (event.target.classList.contains("now")) {
+          // 파랑
+          endTime = new Date();
+          const current = endTime - startTime;
+          records.push(current);
+          const average = records.reduce((a, c) => a + c) / records.length; // 평균구하는코드
+          $result.textContent = `현재 ${current}ms, 평균 : ${average}ms`;
+          startTime = null;
+          endTime = null;
+
+          $screen.classList.replace("now", "waiting");
+          // $screen.innerHTML = "잘했어요!" + "<br />";
+          $screen.textContent = "다시 시작하려면 클릭하세요.";
+          // 끝 시간 재기
+          // 시간 차이 저장하기
+        }
+      });
+
+      //8-4
+    </script>
+  </body>
+</html>
