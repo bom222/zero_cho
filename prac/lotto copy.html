@@ -62,9 +62,45 @@
       }, 3000);
       setTimeout(() => {
         $ball.className = "ball";
+        $ball.textContent = winBalls[3];
+        $result.appendChild($ball);
+      }, 4000);
+      setTimeout(() => {
+        $ball.className = "ball";
+        $ball.textContent = winBalls[4];
+        $result.appendChild($ball);
+      }, 5000);
+      setTimeout(() => {
+        $ball.className = "ball";
+        $ball.textContent = winBalls[5];
+        $result.appendChild($ball);
+      }, 6000);
+      setTimeout(() => {
+        $ball.className = "ball";
         $ball.textContent = bonus;
         $bonus.appendChild($ball);
-      }, 4000);
+      }, 7000);
+
+      // 정답코드
+      //위 코드를 수정하시오
+      // const showBall = (number, $target) => {
+      //   const $ball = document.createElement("div");
+      //   $ball.className = "ball";
+      //   $ball.textContent = number;
+      //   $result.appendChild($ball);
+      // };
+
+      // for (let i = 0; i < 6; i++) {
+      //   setTimeout(() => {
+      //     showBall(winBalls[i], $result);
+      //   }, (i + 1) * 1000);
+      // }
+
+      // setTimeout(() => {
+      //   $ball.className = "ball";
+      //   $ball.textContent = bonus;
+      //   $bonus.appendChild($ball);
+      // }, 7000);
     </script>
   </body>
 </html>
